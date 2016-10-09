@@ -22,3 +22,5 @@
 
 *.swp
 .env
+
+/public/uploads/

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20161009185715) do
 
   create_table "videos", force: :cascade do |t|
     t.string "name"
-    t.json   "full_video"
+    t.string "full_video"
   end
 
 end

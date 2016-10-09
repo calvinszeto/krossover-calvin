@@ -1,7 +1,12 @@
 class Api::V1::VideosController < ApiController
 	def create
-		@video = Video.create!(video_params)
-		render json: @video
+		@video = Video.new(video_params)
+
+		if @video.save
+			render json: @video
+		else
+			render status: 400
+		end
 	end
 
 	private
