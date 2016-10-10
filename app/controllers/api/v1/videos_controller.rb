@@ -1,4 +1,8 @@
 class Api::V1::VideosController < ApiController
+	def show
+		@video = Video.find(params[:id])
+	end
+
 	def create
 		@video = Video.new(video_params)
 
