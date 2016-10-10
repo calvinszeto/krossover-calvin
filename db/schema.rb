@@ -10,14 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009185715) do
+ActiveRecord::Schema.define(version: 20161010161416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "video_clips", force: :cascade do |t|
+    t.integer "video_id"
+    t.string  "name"
+    t.string  "start"
+    t.string  "end"
+    t.index ["video_id"], name: "index_video_clips_on_video_id", using: :btree
+  end
 
   create_table "videos", force: :cascade do |t|
     t.string "name"
     t.string "full_video"
   end
 
+  add_foreign_key "video_clips", "videos"
 end

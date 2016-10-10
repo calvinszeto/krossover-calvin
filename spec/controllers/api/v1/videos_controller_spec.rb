@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe Api::V1::VideosController do
+	render_views
+
 	describe 'create' do
 		let(:sample_video) {fixture_file_upload('files/sample.mp4', 'video/mp4')}
 
@@ -16,7 +18,7 @@ describe Api::V1::VideosController do
 			expect(response.status).to eq 200
 			video = JSON.parse(response.body)
 			expect(video['name']).to eq('test video')
-			expect(video['full_video']['url']).not_to be_nil
+			expect(video['video_url']).not_to be_nil
 		end
 	end
 end

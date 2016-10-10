@@ -7,7 +7,7 @@ class Api::V1::VideosController < ApiController
 		@video = Video.new(video_params)
 
 		if @video.save
-			render json: @video
+			render :show
 		else
 			render status: 400
 		end
