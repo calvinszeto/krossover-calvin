@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular.min
+//= require angular-route.min
 //= require angular-resource.min
 //= require ng-file-upload.min
-//= require turbolinks
+//= require app
 //= require_tree .
