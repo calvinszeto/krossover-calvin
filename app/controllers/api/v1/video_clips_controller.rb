@@ -7,7 +7,7 @@ class Api::V1::VideoClipsController < ApiController
 	end
 
 	def create
-		@video_clip = VideoClip.new(video_clip_params)
+		@video_clip = @video.video_clips.new(video_clip_params)
 
 		if @video_clip.save
 			render :index

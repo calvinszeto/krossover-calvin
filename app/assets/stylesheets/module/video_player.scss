@@ -1,0 +1,27 @@
+.vp {
+	display: flex;
+
+	&__video {
+		flex: 3 1 720px;
+	}
+
+	video {
+		width: 100%;
+		height: auto;
+	}
+	
+	&__clip-list {
+		flex: 1 1 300px;
+		min-width: 300px;
+
+		padding: 20px;
+	}
+
+	form {
+		display: table;
+	}
+
+	label, input {
+		display: table-cell;
+	}
+}

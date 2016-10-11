@@ -1,26 +1,36 @@
-<div ng-show="videoLink">
-	<video controls ng-src="{{videoLink}}">
-	</video>
-	<div>Clips</div>
-	<ol>
-		<li ng-repeat="clip in videoClips">
-			<a ng-click="setVideoLinkFromClip(clip)">{{clip.name}}</a>
-		</li>
-	</ol>
-	<form>
-		Add a clip
-		<label>
-			Name
-			<input type="text" ng-model="newClip.name"></input>
-		</label>
-		<label>
-			Start
-			<input type="text" ng-model="newClip.start"></input>
-		</label>
-		<label>
-			End
-			<input type="text" ng-model="newClip.end"></input>
-		</label>
-		<button type="submit" ng-click="createNewClip()">Add</button>
-	 </form>
+<div ng-show="videoLink" class="vp">
+	<div class="vp__video">
+		<video controls ng-src="{{videoLink}}">
+		</video>
+	</div>
+	<div class="vp__clip-list">
+		<div>Video Clips</div>
+		<ul>
+			<li ng-repeat="clip in videoClips">
+				<a ng-click="setVideoLinkFromClip(clip)">{{clip.name}}</a>
+			</li>
+		</ul>
+		<form>
+			<div>Add a Clip</div>
+			<div>
+				<label>
+					Name
+				</label>
+				<input type="text" ng-model="newClip.name"></input>
+			</div>
+			<div>
+				<label>
+					Start
+				</label>
+				<input type="text" ng-model="newClip.start"></input>
+			</div>
+			<div>
+				<label>
+					End (optional)
+				</label>
+				<input type="text" ng-model="newClip.end"></input>
+			</div>
+			<button type="submit" ng-click="createNewClip()">Add</button>
+		 </form>
+  </div>
 </div>
