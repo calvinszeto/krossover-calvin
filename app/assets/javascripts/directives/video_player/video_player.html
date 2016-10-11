@@ -1,4 +1,26 @@
 <div ng-show="videoLink">
 	<video controls ng-src="{{videoLink}}">
 	</video>
+	<div>Clips</div>
+	<ol>
+		<li ng-repeat="clip in videoClips">
+			<a ng-click="setVideoLinkFromClip(clip)">{{clip.name}}</a>
+		</li>
+	</ol>
+	<form>
+		Add a clip
+		<label>
+			Name
+			<input type="text" ng-model="newClip.name"></input>
+		</label>
+		<label>
+			Start
+			<input type="text" ng-model="newClip.start"></input>
+		</label>
+		<label>
+			End
+			<input type="text" ng-model="newClip.end"></input>
+		</label>
+		<button type="submit" ng-click="createNewClip()">Add</button>
+	 </form>
 </div>
