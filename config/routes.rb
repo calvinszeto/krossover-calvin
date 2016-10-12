@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+	root 'home#index'
+
 	namespace :api, defaults: {format: :json} do
 		namespace :v1 do
 			resources :videos do
@@ -7,6 +9,5 @@ Rails.application.routes.draw do
 		end
 	end
 
-	get'*path' => 'home#index'
-	root 'home#index'
+	get '*path' => 'home#index'
 end
