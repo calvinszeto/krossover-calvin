@@ -62,6 +62,15 @@
 		}
 	}
 
+	&__clip-list-title-edit {
+		cursor: pointer;
+	}
+
+	&__extra-tools {
+		display: flex;
+		justify-content: space-between;
+	}
+
 	&__clip-list-item {
 		&:nth-child(odd) {
 			background: #CECECE;

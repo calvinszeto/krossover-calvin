@@ -2,6 +2,9 @@ app.directive("videoPlayer", function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'assets/directives/video_player/video_player.html',
+		scope: {
+			editable: '='
+		},
 		controller: ['$scope', 'Videos', '$routeParams', '$sce', 'VideoClips', '$timeout', function($scope, Videos, $routeParams, $sce, VideoClips, $timeout) {
 			var timeInSeconds = function(time) {
 				let times = time.split(":"); // "hh:mm:ss"

@@ -37,15 +37,20 @@
 		<div class="vp__clip-list-title">
 			<h2 ng-hide="video.editing">{{video.name}}</h2>
 			<input ng-show="video.editing" type="text" ng-model="video.name">
-			<div ng-click="video.editing = true" ng-hide="video.editing">
+			<div class="vp__clip-list-title-edit" ng-click="video.editing = true" ng-hide="!editable || video.editing">
 				<img src="assets/edit.png" title="edit"></div>
-			<div ng-click="updateVideo()" ng-show="video.editing">
+			<div class="vp__clip-list-title-edit" ng-click="updateVideo()" ng-show="video.editing">
 				<img src="assets/save.png" title="save"></div>
 		</div>
-		<div class="vp__autoplay">Autoplay 
-			<span class="vp__autoplay--on" ng-click="video.autoplay=false" ng-show="video.autoplay">on</span>
-			<span class="vp__autoplay--off" ng-click="video.autoplay=true" ng-hide="video.autoplay">off</span>
-		</div>
+		<div class="vp__extra-tools">
+			<div class="vp__autoplay">Autoplay 
+				<span class="vp__autoplay--on" ng-click="video.autoplay=false" ng-show="video.autoplay">on</span>
+				<span class="vp__autoplay--off" ng-click="video.autoplay=true" ng-hide="video.autoplay">off</span>
+			</div>
+			<div ng-show="editable">
+				<a ng-href="/viewer/{{video.id}}">View-Only Link</a>
+			</div>
+	  </div>
 		<ul class="vp__clip-list">
 			<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
 				<div class="vp__clip-index">
@@ -67,14 +72,14 @@
 							ui-mask-placeholder-char="0" model-view-value="true"></input>
 					</div>
 				</div>
-				<div class="vp__clip-tools" ng-show="$index != 0">
+				<div class="vp__clip-tools" ng-show="$index != 0 && editable">
 					<div ng-hide="clip.editing" ng-click="clip.editing = true"><img src="assets/edit.png" title="edit"></div>
 					<div ng-show="clip.editing" ng-click="updateClip(clip)"><img src="assets/save.png" title="save"></div>
 					<div ng-click="deleteClip(clip)"><img src="assets/delete.png" title="delete"></div>
 				</div>
 			</li>
 		</ul>
-		<form>
+		<form ng-show="editable">
 			<h3>Add a Clip</h3>
 			<div ng-show="newClipError" class="vp__clip-error">{{newClipError}}</div>
 			<div class="vp__clip-form">
