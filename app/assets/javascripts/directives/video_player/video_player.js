@@ -164,6 +164,10 @@ app.directive("videoPlayer", function() {
 					setVideoClips(videoClips);
 				});
 			}
+
+			// Set up hotkeys
+			//Mousetrap.bind('j', playNext);
+			//Mousetrap.bind('k', playPrevious);
 		}]
 	}
 })
