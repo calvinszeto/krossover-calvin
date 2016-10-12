@@ -7,19 +7,19 @@ app.directive("videoPlayer", function() {
 		},
 		controller: ['$scope', 'Videos', '$routeParams', '$sce', 'VideoClips', '$timeout', function($scope, Videos, $routeParams, $sce, VideoClips, $timeout) {
 			var timeInSeconds = function(time) {
-				let times = time.split(":"); // "hh:mm:ss"
+				var times = time.split(":"); // "hh:mm:ss"
 				return parseInt(times[0]) * 3600 + parseInt(times[1]) * 60 + parseInt(times[2]);
 			}
 
 			var timeInString = function(time) {
-				let hours = String("00" + Math.floor(time / 3600)).slice(-2);
-				let minutes = String("00" + Math.floor((time % 3600) / 60)).slice(-2);
-				let seconds = String("00" + Math.floor(time % 60)).slice(-2);
+				var hours = String("00" + Math.floor(time / 3600)).slice(-2);
+				var minutes = String("00" + Math.floor((time % 3600) / 60)).slice(-2);
+				var seconds = String("00" + Math.floor(time % 60)).slice(-2);
 				return [hours, minutes, seconds].join(":");
 			}
 
 			var validateClip = function(clip) {
-				let duration = document.getElementById('video').duration;
+				var duration = document.getElementById('video').duration;
 				if (!clip.name || clip.name === "") {
 					return "Name must not be blank.";
 				} else if (timeInSeconds(clip.start) >=  duration) {
@@ -34,7 +34,7 @@ app.directive("videoPlayer", function() {
 			}
 
 			var setDefaults = function(clip) {
-				let duration = document.getElementById('video').duration;
+				var duration = document.getElementById('video').duration;
 				// Set defaults for start and end
 				clip.start = clip.start || timeInString(0);
 				clip.end = clip.end || timeInString(duration);
@@ -59,7 +59,7 @@ app.directive("videoPlayer", function() {
 			};
 
 			var setLoadingListener = function() {
-					let video = document.getElementById('video');
+					var video = document.getElementById('video');
 					var loadVideo = function() {
 						video.removeEventListener('loadeddata', loadVideo);
 						$scope.video.ready = true;
@@ -86,7 +86,7 @@ app.directive("videoPlayer", function() {
 				resetPlaying();
 				$scope.videoClips[index].playing = true;
 
-				let video = document.getElementById('video');
+				var video = document.getElementById('video');
 				$timeout(function() {
 					if(video.readyState === 4) {
 						$scope.video.ready = true;
@@ -116,7 +116,7 @@ app.directive("videoPlayer", function() {
 
 				// Check validations
 				$scope.newClipError = undefined;
-				let error = validateClip($scope.newClip);
+				var error = validateClip($scope.newClip);
 				if(error === "") {
 					var videoClips = VideoClips.save({videoId: videoId}, $scope.newClip, () => setVideoClips(videoClips));
 					$scope.newClip = {};
@@ -130,7 +130,7 @@ app.directive("videoPlayer", function() {
 
 				// Check validations
 				clip.error = undefined;
-				let error = validateClip(clip);
+				var error = validateClip(clip);
 				if(error === "") {
 					var videoClips = VideoClips.update({videoId: videoId, videoClipId: clip.id}, clip, () => setVideoClips(videoClips));
 				} else {
@@ -144,7 +144,7 @@ app.directive("videoPlayer", function() {
 
 			$scope.updateVideo = function() {
 				$scope.video.editing = false;
-				let video = Videos.update({videoId: videoId}, $scope.video, function() {
+				var video = Videos.update({videoId: videoId}, $scope.video, function() {
 					$scope.video.name = video.name;
 				});
 			}
