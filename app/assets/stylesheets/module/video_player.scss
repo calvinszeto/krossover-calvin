@@ -71,6 +71,12 @@
 		cursor: pointer;
 	}
 
+	&__clip-info-edit {
+		@extend .vp__clip-info;
+		padding-right: 10px;
+		cursor: none;
+	}
+
 	&__clip-time {
 		font-size: 13px;
 	}
@@ -80,8 +86,10 @@
 		display: flex;
 		flex-flow: column nowrap;
 		justify-content: center;
+
 		img {
 			width: 15px;
+			cursor: pointer;
 		}
 	}
 

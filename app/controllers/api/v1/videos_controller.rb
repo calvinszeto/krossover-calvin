@@ -13,6 +13,16 @@ class Api::V1::VideosController < ApiController
 		end
 	end
 
+	def update
+		@video = Video.find(params[:id])
+
+		if @video.update_attributes(video_params)
+			render :show
+		else
+			render status: 400
+		end
+	end
+
 	private
 
 	def video_params

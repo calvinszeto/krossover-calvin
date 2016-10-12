@@ -35,8 +35,12 @@
 	</div>
 	<div class="vp__clips">
 		<div class="vp__clip-list-title">
-			<h2>{{video.name}}</h2>
-			<div><img src="assets/edit.png" title="edit"></div>
+			<h2 ng-hide="video.editing">{{video.name}}</h2>
+			<input ng-show="video.editing" type="text" ng-model="video.name">
+			<div ng-click="video.editing = true" ng-hide="video.editing">
+				<img src="assets/edit.png" title="edit"></div>
+			<div ng-click="updateVideo()" ng-show="video.editing">
+				<img src="assets/save.png" title="save"></div>
 		</div>
 		<ul class="vp__clip-list">
 			<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
@@ -44,13 +48,25 @@
 					<span ng-hide="clip.playing">{{$index + 1}}</span>
 					<span ng-show="clip.playing"><img src="assets/play.png"></span>
 				</div>
-				<div class="vp__clip-info" ng-click="setVideoLinkFromClip(clip, $index, 0)">
+				<div class="vp__clip-info" ng-click="setVideoLinkFromClip(clip, $index, 0)" ng-hide="clip.editing">
 					<h4>{{clip.name}}</h4>
 					<div class="vp__clip-time" ng-show="$index != 0">{{clip.start}} - {{clip.end}}</div>
 				</div>
+				<div class="vp__clip-info-edit" ng-show="clip.editing">
+					<input type="text" ng-model="clip.name">
+					<div>
+						<input type="text" class="vp__time-input"
+							ng-model="clip.start" ui-mask="99:99:99" ui-mask-placeholder 
+							ui-mask-placeholder-char="0" model-view-value="true"></input>
+						<input type="text" class="vp__time-input "
+							ng-model="clip.end" ui-mask="99:99:99" ui-mask-placeholder 
+							ui-mask-placeholder-char="0" model-view-value="true"></input>
+					</div>
+				</div>
 				<div class="vp__clip-tools" ng-show="$index != 0">
-					<div><img src="assets/edit.png" title="edit"></div>
-					<div><img src="assets/delete.png" title="delete"></div>
+					<div ng-hide="clip.editing" ng-click="clip.editing = true"><img src="assets/edit.png" title="edit"></div>
+					<div ng-show="clip.editing" ng-click="updateClip(clip)"><img src="assets/save.png" title="save"></div>
+					<div ng-click="deleteClip(clip)"><img src="assets/delete.png" title="delete"></div>
 				</div>
 			</li>
 		</ul>
