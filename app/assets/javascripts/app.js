@@ -5,7 +5,8 @@ app.config(["$httpProvider", function($httpProvider) {
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 }]);
 
-app.config(["$routeProvider",function($routeProvider) {
+app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider
         .when('/editor/:videoId?', {
             controller: 'EditorCtrl',
