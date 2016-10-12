@@ -16,5 +16,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
             controller: 'ViewerCtrl',
             templateUrl: '/assets/controllers/viewer/viewer.html'
         })
-        .otherwise({redirectTo: '/editor'});
+        .when('/', {
+            redirectTo: '/editor';
+        })
 }]);
