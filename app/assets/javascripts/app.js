@@ -14,7 +14,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
         //})
         .when('/viewer/:videoId?', {
             controller: 'ViewerCtrl',
-            template: 'test'
+            template: '<video-player editable="false"></video-player>'
         })
         //.otherwise({
             //redirectTo: '/editor'
