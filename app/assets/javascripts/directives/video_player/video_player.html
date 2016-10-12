@@ -1,6 +1,6 @@
 <div ng-show="videoLink" class="vp">
 	<div class="vp__video">
-		<video controls ng-src="{{videoLink}}">
+		<video controls ng-src="{{videoLink}}" id="video">
 		</video>
 	</div>
 	<div class="vp__clips">
@@ -11,9 +11,9 @@
 					<div class="vp__clip-index">{{$index + 1}}</div>
 					<div class="vp__clip-info">
 						<h4>{{clip.name}}</h4>
-						<div class="vp__clip-time">{{clip.start}} - {{clip.end}}</div>
+						<div class="vp__clip-time" ng-show="$index != 0">{{clip.start}} - {{clip.end}}</div>
 					</div>
-					<div class="vp__clip-tools">
+					<div class="vp__clip-tools" ng-show="$index != 0">
 						<div><img src="assets/edit.png" title="edit"></div>
 						<div><img src="assets/delete.png" title="delete"></div>
 					</div>
@@ -22,6 +22,7 @@
 		</ul>
 		<form>
 			<h3>Add a Clip</h3>
+			<div ng-show="newClipError" class="vp__clip-error">{{newClipError}}</div>
 			<div class="vp__clip-form">
 				<div>
 					<label>
@@ -45,7 +46,7 @@
 						ng-model="newClip.end" ui-mask="99:99:99" ui-mask-placeholder 
 						ui-mask-placeholder-char="0" model-view-value="true"></input>
 				</div>
-				<div class="vp__clip-add"><img ng-click="createNewClip()" src="assets/add.png"></div>
+				<div class="vp__clip-add" ng-click="createNewClip()"><img src="assets/add.png"></div>
 			</div>
 		 </form>
   </div>

@@ -10,6 +10,7 @@ class Api::V1::VideoClipsController < ApiController
 		@video_clip = @video.video_clips.new(video_clip_params)
 
 		if @video_clip.save
+			@video_clips = @video.video_clips
 			render :index
 		else
 			render status: 400
@@ -18,11 +19,13 @@ class Api::V1::VideoClipsController < ApiController
 
 	def update
 		@video_clip.update_attributes video_clip_params
+		@video_clips = @video.video_clips
 		render :index
 	end
 
 	def destroy
 		@video_clip.destroy
+		@video_clips = @video.video_clips
 		render :index
 	end
 

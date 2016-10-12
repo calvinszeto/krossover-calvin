@@ -4,6 +4,8 @@ class VideoClip < ActiveRecord::Base
 
 	belongs_to :video
 
+	default_scope { order('start ASC') }
+
 	def self.whitelisted_attributes
 		[:name, :start, :end]
 	end
