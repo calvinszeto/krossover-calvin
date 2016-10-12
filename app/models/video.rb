@@ -7,13 +7,15 @@ class Video < ActiveRecord::Base
 	private
 
 	def self.whitelisted_attributes
-		[:name]
+		[:name, :full_video]
 	end
 
 	def set_video_name
-		unless full_video.nil?
+		unless full_video.file.nil?
 			filename = full_video.file.filename
 			self.update_attribute :name, File.basename(filename, File.extname(filename))
+		else
+			self.update_attribute :name, "Untitled"
 		end
 	end
 end

@@ -1,5 +1,9 @@
 .vp {
 	display: flex;
+	
+	@media (max-width: 800px) {
+		flex-flow: row wrap;
+	}
 
 	&__video {
 		flex: 3 1 720px;
@@ -19,6 +23,10 @@
 		min-width: 300px;
 
 		padding: 0 0 0 20px;
+
+		@media (max-width: 720px) {
+			padding-left: 0;
+		}
 	}
 
 	&__clip-list {
@@ -117,6 +125,13 @@
 		margin-top: 5px;
 	}
 
+	&__clip-name-form {
+		flex-shrink: 1;
+		input {
+			width: 100%;
+		}
+	}
+
 	&__clip-add {
 		margin: 25px 10px 0;
 		width: 15px;
@@ -130,11 +145,7 @@
 	}
 
 	form {
-		display: table;
 		width: 100%;
-	}
-
-	label, input {
-		display: table-cell;
+		max-width: 325px;
 	}
 }
