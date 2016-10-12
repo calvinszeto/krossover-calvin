@@ -118,7 +118,7 @@ app.directive("videoPlayer", function() {
 				$scope.newClipError = undefined;
 				var error = validateClip($scope.newClip);
 				if(error === "") {
-					var videoClips = VideoClips.save({videoId: videoId}, $scope.newClip, () => setVideoClips(videoClips));
+					var videoClips = VideoClips.save({videoId: videoId}, $scope.newClip, function () {setVideoClips(videoClips)});
 					$scope.newClip = {};
 				} else {
 					$scope.newClipError = error;
@@ -132,14 +132,14 @@ app.directive("videoPlayer", function() {
 				clip.error = undefined;
 				var error = validateClip(clip);
 				if(error === "") {
-					var videoClips = VideoClips.update({videoId: videoId, videoClipId: clip.id}, clip, () => setVideoClips(videoClips));
+					var videoClips = VideoClips.update({videoId: videoId, videoClipId: clip.id}, clip, function () { setVideoClips(videoClips)});
 				} else {
 					clip.error = error;
 				}
 			}
 
 			$scope.deleteClip = function(clip) {
-				var videoClips = VideoClips.delete({videoId: videoId, videoClipId: clip.id}, () => setVideoClips(videoClips));
+				var videoClips = VideoClips.delete({videoId: videoId, videoClipId: clip.id}, function () {setVideoClips(videoClips)});
 			}
 
 			$scope.updateVideo = function() {
