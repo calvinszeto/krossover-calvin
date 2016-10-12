@@ -3,19 +3,19 @@ app.directive("videoPlayer", function() {
 		restrict: 'E',
 		templateUrl: 'assets/directives/video_player/video_player.html',
 		controller: ['$scope', 'Videos', '$routeParams', '$sce', 'VideoClips', '$timeout', function($scope, Videos, $routeParams, $sce, VideoClips, $timeout) {
-			timeInSeconds = function(time) {
+			var timeInSeconds = function(time) {
 				let times = time.split(":"); // "hh:mm:ss"
 				return parseInt(times[0]) * 3600 + parseInt(times[1]) * 60 + parseInt(times[2]);
 			}
 
-			timeInString = function(time) {
+			var timeInString = function(time) {
 				let hours = String("00" + Math.floor(time / 3600)).slice(-2);
 				let minutes = String("00" + Math.floor((time % 3600) / 60)).slice(-2);
 				let seconds = String("00" + Math.floor(time % 60)).slice(-2);
 				return [hours, minutes, seconds].join(":");
 			}
 
-			validateClip = function(clip, duration) {
+			var validateClip = function(clip, duration) {
 				if (!clip.name || clip.name === "") {
 					return "Name must not be blank.";
 				} else if (timeInSeconds(clip.start) >=  duration) {
@@ -29,23 +29,69 @@ app.directive("videoPlayer", function() {
 				}
 			}
 
-			setVideoClips = function(clips) {
+			var setVideoClips = function(clips) {
 				// Make the full video the first clip
 				$scope.videoClips = [
 						{
 							name: 'Full Video',
-							start: '0'
+							start: '0',
+							playing: true
 						}
 				];
 				Array.prototype.push.apply($scope.videoClips, clips);
 			};
 
-			$scope.setVideoLinkFromClip = function(clip) {
-				var videoLink = $scope.fullVideoLink + '#t=' + clip.start;	
+			var resetPlaying = function() {
+				$scope.videoClips.forEach(function(clip) {
+					clip.playing = false;
+				});
+			};
+
+			$scope.setVideoLinkFromClip = function(clip, index, delay) {
+				// Run loading animation in a separate digest
+				$timeout(function() { 
+					$scope.video.ready = false;
+					$scope.$apply();
+				}, 0, false);
+				
+				// Replace the video with the clip
+				var videoLink = $scope.video.video_url + '#t=' + clip.start;	
 				if (clip.end) {
 					videoLink += ',' + clip.end;
 				}
 				$scope.videoLink = $sce.trustAsResourceUrl(videoLink);
+
+				// Set the clip as currently playing
+				resetPlaying();
+				$scope.videoClips[index].playing = true;
+
+				let video = document.getElementById('video');
+				$timeout(function() {
+					if(video.readyState === 4) {
+						$scope.video.ready = true;
+					} else {
+						var loadVideo = function() {
+							video.removeEventListener('loadeddata', loadVideo);
+							$scope.video.ready = true;
+							$scope.$apply();
+						}
+						video.addEventListener('loadeddata', loadVideo);
+					}
+				
+				  // Play the clip after the digest
+					video.play();
+
+					var playNextClip = function() {
+						if(video.currentTime >= timeInSeconds(clip.end)) {
+							video.removeEventListener('timeupdate', playNextClip);
+							if(index + 1 < $scope.videoClips.length) {
+								$scope.setVideoLinkFromClip($scope.videoClips[index + 1], index + 1, 3000);
+							}
+						}
+					};
+
+					video.addEventListener('timeupdate', playNextClip);
+				}, delay, true);
 			};
 
 			$scope.createNewClip = function() {
@@ -84,6 +130,13 @@ app.directive("videoPlayer", function() {
 				// Set the current video
 				$scope.video = Videos.get({videoId: videoId}, function() {
 					$scope.videoLink = $sce.trustAsResourceUrl($scope.video.video_url);
+					let video = document.getElementById('video');
+					var loadVideo = function() {
+						video.removeEventListener('loadeddata', loadVideo);
+						$scope.video.ready = true;
+						$scope.$apply();
+					}
+					video.addEventListener('loadeddata', loadVideo);
 				});	
 				// Set the video clips
 				var videoClips = VideoClips.query({videoId: videoId}, function() {

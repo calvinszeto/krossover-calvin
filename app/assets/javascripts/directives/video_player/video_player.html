@@ -1,24 +1,58 @@
 <div ng-show="videoLink" class="vp">
 	<div class="vp__video">
-		<video controls ng-src="{{videoLink}}" id="video">
+		<video controls ng-src="{{videoLink}}" ng-show="video.ready" id="video">
 		</video>
+		<div class="loader loader--style6" ng-hide="video.ready">
+			<div>Loading video</div>
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				 width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+				<rect x="0" y="13" width="4" height="5" fill="#333">
+					<animate attributeName="height" attributeType="XML"
+						values="5;21;5" 
+						begin="0s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="y" attributeType="XML"
+						values="13; 5; 13"
+						begin="0s" dur="0.6s" repeatCount="indefinite" />
+				</rect>
+				<rect x="10" y="13" width="4" height="5" fill="#333">
+					<animate attributeName="height" attributeType="XML"
+						values="5;21;5" 
+						begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="y" attributeType="XML"
+						values="13; 5; 13"
+						begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+				</rect>
+				<rect x="20" y="13" width="4" height="5" fill="#333">
+					<animate attributeName="height" attributeType="XML"
+						values="5;21;5" 
+						begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="y" attributeType="XML"
+						values="13; 5; 13"
+						begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+				</rect>
+			</svg>
+		</div>
 	</div>
 	<div class="vp__clips">
-		<h2>{{video.name}}</h2>
+		<div class="vp__clip-list-title">
+			<h2>{{video.name}}</h2>
+			<div><img src="assets/edit.png" title="edit"></div>
+		</div>
 		<ul class="vp__clip-list">
-			<a ng-click="setVideoLinkFromClip(clip)">
-				<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
-					<div class="vp__clip-index">{{$index + 1}}</div>
-					<div class="vp__clip-info">
-						<h4>{{clip.name}}</h4>
-						<div class="vp__clip-time" ng-show="$index != 0">{{clip.start}} - {{clip.end}}</div>
-					</div>
-					<div class="vp__clip-tools" ng-show="$index != 0">
-						<div><img src="assets/edit.png" title="edit"></div>
-						<div><img src="assets/delete.png" title="delete"></div>
-					</div>
-				</li>
-			</a>
+			<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
+				<div class="vp__clip-index">
+					<span ng-hide="clip.playing">{{$index + 1}}</span>
+					<span ng-show="clip.playing"><img src="assets/play.png"></span>
+				</div>
+				<div class="vp__clip-info" ng-click="setVideoLinkFromClip(clip, $index, 0)">
+					<h4>{{clip.name}}</h4>
+					<div class="vp__clip-time" ng-show="$index != 0">{{clip.start}} - {{clip.end}}</div>
+				</div>
+				<div class="vp__clip-tools" ng-show="$index != 0">
+					<div><img src="assets/edit.png" title="edit"></div>
+					<div><img src="assets/delete.png" title="delete"></div>
+				</div>
+			</li>
 		</ul>
 		<form>
 			<h3>Add a Clip</h3>
