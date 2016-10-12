@@ -1,4 +1,4 @@
-app = angular.module('krossover', ['ngRoute', 'ngResource', 'ngFileUpload', 'ui.mask']);
+app = angular.module('krossover', ['ngRoute', 'ngResource', 'ngFileUpload', 'ui.mask', 'templates']);
 
 // Add CSRF Token to all AJAX requests
 app.config(["$httpProvider", function($httpProvider) {
@@ -10,11 +10,11 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     $routeProvider
         .when('/editor/:videoId?', {
             controller: 'EditorCtrl',
-            templateUrl: '/assets/controllers/editor/editor.html'
+            templateUrl: 'controllers/editor/editor.html'
         })
         .when('/viewer/:videoId?', {
             controller: 'ViewerCtrl',
-            templateUrl: '/assets/controllers/viewer/viewer.html'
+            templateUrl: 'controllers/viewer/viewer.html'
         })
         .otherwise({
             redirectTo: '/editor'

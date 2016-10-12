@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 		end
 	end
 
+  get 'assets/*page' => redirect('/404.html')
 	get '*path' => 'home#index'
 end
