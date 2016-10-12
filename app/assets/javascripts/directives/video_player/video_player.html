@@ -38,9 +38,9 @@
 			<h2 ng-hide="video.editing">{{video.name}}</h2>
 			<input ng-show="video.editing" type="text" ng-model="video.name">
 			<div class="vp__clip-list-title-edit" ng-click="video.editing = true" ng-hide="!editable || video.editing">
-				<img src="assets/edit.png" title="edit"></div>
+				<img src="https://s3.amazonaws.com/krossover-videos/edit.png" title="edit"></div>
 			<div class="vp__clip-list-title-edit" ng-click="updateVideo()" ng-show="video.editing">
-				<img src="assets/save.png" title="save"></div>
+				<img src="https://s3.amazonaws.com/krossover-videos/save.png" title="save"></div>
 		</div>
 		<div class="vp__extra-tools">
 			<div class="vp__autoplay">Autoplay 
@@ -55,7 +55,7 @@
 			<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
 				<div class="vp__clip-index">
 					<span ng-hide="clip.playing">{{$index + 1}}</span>
-					<span ng-show="clip.playing"><img src="assets/play.png"></span>
+					<span ng-show="clip.playing"><img src="https://s3.amazonaws.com/krossover-videos/play.png"></span>
 				</div>
 				<div class="vp__clip-info" ng-click="setVideoLinkFromClip(clip, $index, 0)" ng-hide="clip.editing">
 					<h4>{{clip.name}}</h4>
@@ -73,9 +73,9 @@
 					</div>
 				</div>
 				<div class="vp__clip-tools" ng-show="$index != 0 && editable">
-					<div ng-hide="clip.editing" ng-click="clip.editing = true"><img src="assets/edit.png" title="edit"></div>
-					<div ng-show="clip.editing" ng-click="updateClip(clip)"><img src="assets/save.png" title="save"></div>
-					<div ng-click="deleteClip(clip)"><img src="assets/delete.png" title="delete"></div>
+					<div ng-hide="clip.editing" ng-click="clip.editing = true"><img src="https://s3.amazonaws.com/krossover-videos/edit.png" title="edit"></div>
+					<div ng-show="clip.editing" ng-click="updateClip(clip)"><img src="https://s3.amazonaws.com/krossover-videos/save.png" title="save"></div>
+					<div ng-click="deleteClip(clip)"><img src="https://s3.amazonaws.com/krossover-videos/delete.png" title="delete"></div>
 				</div>
 			</li>
 		</ul>
@@ -105,7 +105,7 @@
 						ng-model="newClip.end" ui-mask="99:99:99" ui-mask-placeholder 
 						ui-mask-placeholder-char="0" model-view-value="true"></input>
 				</div>
-				<div class="vp__clip-add" ng-click="createNewClip()"><img src="assets/add.png"></div>
+				<div class="vp__clip-add" ng-click="createNewClip()"><img src="https://s3.amazonaws.com/krossover-videos/add.png"></div>
 			</div>
 		 </form>
   </div>
