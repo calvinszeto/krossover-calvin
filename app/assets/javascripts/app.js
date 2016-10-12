@@ -17,6 +17,6 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
             templateUrl: '/assets/controllers/viewer/viewer.html'
         })
         .when('/', {
-            redirectTo: '/editor';
-        })
+            redirectTo: '/editor'
+        });
 }]);
