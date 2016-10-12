@@ -3,34 +3,50 @@
 		<video controls ng-src="{{videoLink}}">
 		</video>
 	</div>
-	<div class="vp__clip-list">
-		<div>Video Clips</div>
-		<ul>
-			<li ng-repeat="clip in videoClips">
-				<a ng-click="setVideoLinkFromClip(clip)">{{clip.name}}</a>
-			</li>
+	<div class="vp__clips">
+		<h2>{{video.name}}</h2>
+		<ul class="vp__clip-list">
+			<a ng-click="setVideoLinkFromClip(clip)">
+				<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
+					<div class="vp__clip-index">{{$index + 1}}</div>
+					<div class="vp__clip-info">
+						<h4>{{clip.name}}</h4>
+						<div class="vp__clip-time">{{clip.start}} - {{clip.end}}</div>
+					</div>
+					<div class="vp__clip-tools">
+						<div><img src="assets/edit.png" title="edit"></div>
+						<div><img src="assets/delete.png" title="delete"></div>
+					</div>
+				</li>
+			</a>
 		</ul>
 		<form>
-			<div>Add a Clip</div>
-			<div>
-				<label>
-					Name
-				</label>
-				<input type="text" ng-model="newClip.name"></input>
+			<h3>Add a Clip</h3>
+			<div class="vp__clip-form">
+				<div>
+					<label>
+						Name
+					</label>
+					<input type="text" ng-model="newClip.name"></input>
+				</div>
+				<div class="vp__time-form">
+					<label>
+						Start
+					</label>
+					<input type="text" class="vp__time-input"
+						ng-model="newClip.start" ui-mask="99:99:99" ui-mask-placeholder 
+					  ui-mask-placeholder-char="0" model-view-value="true"></input>
+				</div>
+				<div class="vp__time-form">
+					<label>
+						End
+					</label>
+					<input type="text" class="vp__time-input "
+						ng-model="newClip.end" ui-mask="99:99:99" ui-mask-placeholder 
+						ui-mask-placeholder-char="0" model-view-value="true"></input>
+				</div>
+				<div class="vp__clip-add"><img ng-click="createNewClip()" src="assets/add.png"></div>
 			</div>
-			<div>
-				<label>
-					Start
-				</label>
-				<input type="text" ng-model="newClip.start"></input>
-			</div>
-			<div>
-				<label>
-					End (optional)
-				</label>
-				<input type="text" ng-model="newClip.end"></input>
-			</div>
-			<button type="submit" ng-click="createNewClip()">Add</button>
 		 </form>
   </div>
 </div>

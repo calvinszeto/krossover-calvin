@@ -16,5 +16,6 @@
 //= require angular-route.min
 //= require angular-resource.min
 //= require ng-file-upload.min
+//= require mask.min
 //= require app
 //= require_tree .

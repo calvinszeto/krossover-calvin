@@ -31,9 +31,8 @@ app.directive("videoPlayer", function() {
 
 			if(videoId !== undefined) {
 				// Set the current video
-				var video = Videos.get({videoId: videoId}, function() {
-					$scope.fullVideoLink = $sce.trustAsResourceUrl(video.video_url);
-					$scope.videoLink = $scope.fullVideoLink;
+				$scope.video = Videos.get({videoId: videoId}, function() {
+					$scope.videoLink = $sce.trustAsResourceUrl($scope.video.video_url);
 				});	
 				// Make the full video the first clip
 				$scope.videoClips.push(

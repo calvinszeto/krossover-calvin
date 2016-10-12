@@ -1,4 +1,4 @@
-app = angular.module('krossover', ['ngRoute', 'ngResource', 'ngFileUpload']);
+app = angular.module('krossover', ['ngRoute', 'ngResource', 'ngFileUpload', 'ui.mask']);
 
 // Add CSRF Token to all AJAX requests
 app.config(["$httpProvider", function($httpProvider) {
