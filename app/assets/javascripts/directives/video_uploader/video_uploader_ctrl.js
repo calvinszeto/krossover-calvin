@@ -1,7 +1,7 @@
 app.directive("videoUploader", function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'assets/directives/video_uploader/video_uploader.html',
+		templateUrl: 'directives/video_uploader/video_uploader.html',
 		controller: ['$scope', 'Upload', '$location', function($scope, Upload, $location) {
 			$scope.upload = function($file) {
 				Upload.upload({
