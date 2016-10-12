@@ -8,15 +8,15 @@ app.config(["$httpProvider", function($httpProvider) {
 app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
-        .when('/editor/:videoId?', {
-            controller: 'EditorCtrl',
-            templateUrl: '/assets/controllers/editor/editor.html'
-        })
+        //.when('/editor/:videoId?', {
+            //controller: 'EditorCtrl',
+            //templateUrl: '/assets/controllers/editor/editor.html'
+        //})
         .when('/viewer/:videoId?', {
             controller: 'ViewerCtrl',
             templateUrl: '/assets/controllers/viewer/viewer.html'
         })
-        .when('/', {
-            redirectTo: '/editor'
-        });
+        //.otherwise({
+            //redirectTo: '/editor'
+        //});
 }]);
