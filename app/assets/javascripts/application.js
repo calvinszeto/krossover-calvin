@@ -18,5 +18,4 @@
 //= require ng-file-upload.min
 //= require mask.min
 //= require mousetrap.min
-//= require app
 //= require_tree .
