@@ -93,16 +93,18 @@ app.directive("videoPlayer", function() {
 				
 					video.play();
 
-					var playNextClip = function() {
-						if(video.currentTime >= timeInSeconds(clip.end)) {
-							video.removeEventListener('timeupdate', playNextClip);
-							if(index + 1 < $scope.videoClips.length) {
-								$scope.setVideoLinkFromClip($scope.videoClips[index+1], index+1, 3000);
+					if ($scope.video.autoplay) {
+						var playNextClip = function() {
+							if(video.currentTime >= timeInSeconds(clip.end)) {
+								video.removeEventListener('timeupdate', playNextClip);
+								if(index + 1 < $scope.videoClips.length) {
+									$scope.setVideoLinkFromClip($scope.videoClips[index+1], index+1, 3000);
+								}
 							}
-						}
-					};
+						};
 
-					video.addEventListener('timeupdate', playNextClip);
+						video.addEventListener('timeupdate', playNextClip);
+					}
 				}, delay, true);
 			};
 

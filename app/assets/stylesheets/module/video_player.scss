@@ -17,6 +17,20 @@
 		width: 100%;
 		height: 100%;
 	}
+
+	&__autoplay {
+		font-size: 16px;	
+	}
+
+	&__autoplay--on {
+		color: green;
+		cursor: pointer;
+	}
+
+	&__autoplay--off {
+		color: red;	
+		cursor: pointer;
+	}
 	
 	&__clips {
 		flex: 1 1 300px;

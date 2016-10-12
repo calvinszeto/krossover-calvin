@@ -42,6 +42,10 @@
 			<div ng-click="updateVideo()" ng-show="video.editing">
 				<img src="assets/save.png" title="save"></div>
 		</div>
+		<div class="vp__autoplay">Autoplay 
+			<span class="vp__autoplay--on" ng-click="video.autoplay=false" ng-show="video.autoplay">on</span>
+			<span class="vp__autoplay--off" ng-click="video.autoplay=true" ng-hide="video.autoplay">off</span>
+		</div>
 		<ul class="vp__clip-list">
 			<li ng-repeat="clip in videoClips" class="vp__clip-list-item">
 				<div class="vp__clip-index">
