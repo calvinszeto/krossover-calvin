@@ -54,4 +54,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'carrierwave'
 gem 'fog'
 
+gem 'angular-rails-templates'
+
 ruby '2.3.0'
